@@ -1,0 +1,18 @@
+---
+name: Module-Build-Kwalitee
+version: 0.10
+author: ~
+abstract: Module::Build subclass with prepackaged tests
+license: perl
+requires:
+  File::Find::Rule: 0
+  Module::Build: 0.26
+  Pod::Coverage::CountParents: 0
+  Test::More: 0
+  Test::Pod: 0
+  YAML: 0
+provides:
+  Module::Build::Kwalitee:
+    file: lib/Module/Build/Kwalitee/Stub.pm
+    version: 0.10
+generated_by: Module::Build version 0.2609
