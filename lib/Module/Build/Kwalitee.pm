@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 =head1 SYNOPSIS
 
@@ -145,7 +145,7 @@ L<Module::Build>
   Stig Brautaset <stig@brautaset.org>
   Mark Fowler <mark@twoshortplanks.com>
   Norman Nunley <nnunley@fotango.com>
-  Chia-link Kao <clkao@clkao.org>
+  Chia-liang Kao <clkao@clkao.org>
   et al.
 
 =cut

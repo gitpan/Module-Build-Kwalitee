@@ -1,6 +1,6 @@
 ---
 name: Module-Build-Kwalitee
-version: 0.10
+version: 0.11
 author: ~
 abstract: Module::Build subclass with prepackaged tests
 license: perl
@@ -14,5 +14,5 @@ requires:
 provides:
   Module::Build::Kwalitee:
     file: lib/Module/Build/Kwalitee/Stub.pm
-    version: 0.10
+    version: 0.11
 generated_by: Module::Build version 0.2609
