@@ -5,20 +5,23 @@
 use strict;
 use warnings;
 
-our @classes;
 
-BEGIN {
-  use File::Find::Rule;
-  @classes = map { my $x = $_;
-      $x =~ s|^lib/||;
-      $x =~ s|/|::|g;
-      $x =~ s|\.pm$||;
-      $x;
-    } File::Find::Rule->file()->name( '[A-Z]*.pm' )->in( 'lib' );
-}
+use Test::More;
+eval q(
+	use File::Find::Rule;
+	use Test::Builder;
+	1;
+) or plan skip_all => 'Necessary modules not installed';
 
-use Test::More tests => scalar @classes;
-use Test::Builder;
+my @classes = map { 
+	my $x = $_;
+	$x =~ s|^lib/||;
+    $x =~ s|/|::|g;
+    $x =~ s|\.pm$||;
+    $x;
+} File::Find::Rule->file()->name( '[A-Z]*.pm' )->in( 'lib' );
+
+plan tests => scalar @classes;
 
 # We need to tweak the numbers of the tests
 my $test = Test::Builder->new;

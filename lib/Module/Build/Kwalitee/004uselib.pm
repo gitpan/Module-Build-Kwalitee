@@ -7,12 +7,13 @@ use strict;
 use warnings;
 our @test;
 
-BEGIN {
-  use File::Find::Rule;
-  @test = File::Find::Rule->file()->name('*.t')->in('t');
-}
+use Test::More;
+eval "use File::Find::Rule; 1;"
+	or plan skip_all => 'File::Find::Rule not installed';
+	
+@test = File::Find::Rule->file()->name('*.t')->in('t');
 
-use Test::More tests => scalar @test;
+plan tests => scalar @test;
 
 foreach my $test ( @test ) {
   my $fh;

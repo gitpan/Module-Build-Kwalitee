@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.11';
+our $VERSION = '0.13';
 
 =head1 SYNOPSIS
 

@@ -4,14 +4,14 @@
 
 use strict;
 use warnings;
-our @classes;
 
-BEGIN {
-  use File::Find::Rule;
-  @classes = File::Find::Rule->file()->name('[A-Z]*.pm')->in('lib');
-}
+use Test::More;
+eval "use File::Find::Rule; 1;"
+	or plan skip_all => 'File::Find::Rule not installed';
 
-use Test::More tests => scalar @classes;
+my @classes = File::Find::Rule->file()->name('[A-Z]*.pm')->in('lib');
+
+plan tests => scalar @classes;
 
 foreach my $class ( @classes ) {
   my $fh;

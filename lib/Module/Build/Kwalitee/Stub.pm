@@ -18,6 +18,14 @@ sub build_requires {
     %{ $self->SUPER::build_requires },
     'File::Find::Rule' => 0,
     'Test::More' => 0,
+  };
+}
+
+# add extra recommends
+sub recommends {
+  my $self = shift;
+  return {
+    %{ $self->SUPER::recommends },
     'Test::Pod' => 0,
     'Pod::Coverage::CountParents' => 0,
   };

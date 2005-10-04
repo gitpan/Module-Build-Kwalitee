@@ -11,4 +11,6 @@ MANIFEST.SKIP
 README
 META.yml
 Makefile.PL
+Changes
+NINJA
 t/build.t

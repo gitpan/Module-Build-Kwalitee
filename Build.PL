@@ -13,6 +13,8 @@ Module::Build->new(
     'File::Find::Rule' => 0,
     'Test::More' => 0,
     'Test::Pod' => 0,
+  },
+  recommends => {
     'Pod::Coverage::CountParents' => 0,
   },
   create_makefile_pl => 'passthrough',

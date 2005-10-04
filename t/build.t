@@ -1,5 +1,5 @@
 use Module::Build::Kwalitee;
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 use File::Temp qw( tempdir );
 use File::Find::Rule;
@@ -12,6 +12,7 @@ chdir $dir;
 ok ! -d "t", 'no directory yet';
 
 ok (my $build = Module::Build::Kwalitee->new(
+  license => 'perl',
   dist_name => 'Foo', 
   dist_version => '0.01',
   dist_author => 'Stig',
@@ -24,13 +25,16 @@ my @files = File::Find::Rule->file()->name('00*.t')->in('t');
 is scalar @files, 5, 'five test files present';
 
 # check deps
-my $deps = {
-  'File::Find::Rule' => 0,
+my $requires = {
   'Test::More' => 0,
+  'File::Find::Rule' => 0,
+};
+my $recommends = {
   'Test::Pod' => 0,
   'Pod::Coverage::CountParents' => 0,
 };
-is_deeply $build->build_requires, $deps, 'expected dependencies';
+is_deeply $build->build_requires, $requires, 'expected requires';
+is_deeply $build->recommends, $recommends, 'expected recommends';
 
 
 # now check distdir target
