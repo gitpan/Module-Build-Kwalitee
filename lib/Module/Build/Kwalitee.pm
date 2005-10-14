@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 =head1 SYNOPSIS
 
@@ -31,17 +31,21 @@ This module requires this bit of magic in your Build.PL:
 
 =head1 DESCRIPTION
 
-Module::Build::Kwalitee is developer tool. It subclasses
-Module::Build and overrides its new() method, so when you run
-'perl Build.PL', boilerplate test files are added to t/. If you
-want these tests added to your distribution, you will have to add
-them to F<MANIFEST> manually.
+Module::Build::Kwalitee subclasses Module::Build to provide
+boilerplate tests for your project. It does this by overriding
+C<new()> and copying tests to your F<t> directory when you run
+'perl Build.PL'.
 
 Module::Build::Kwalitee gets over the bootstrapping problem by
 overriding Module::Build's C<distdir> target, adding a "mbk"
 directory to your distribution containing a small stub
 Module::Build::Kwalitee which just overrides Module::Build's
 build_requires() method to add the dependencies of its tests.
+
+Module::Build::Kwalitee tests are not automatically added to
+F<MANIFEST> so if you want them shipped with your distribution
+you will have to do this manually.
+
 
 =head2 Tests
 

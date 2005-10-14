@@ -1,3 +1,6 @@
+0.14
+  o Improve description a bit
+
 0.13
   o The stub M::B::K that ships with distributions now merely
     recommend some modules; if they are missing, some tests are
@@ -5,16 +8,12 @@
     these modules are all mandatory (so all tests will run).
 
   o for .pod files, do syntax checking but skip coverage checks
-  -- Stig Brautaset
 
 0.12 
   o Added Changes file
-  -- Stig Brautaset
 
 0.11
   o Minor pod fixes
-  -- Stig Brautaset
 
 0.10
   o Initial release to CPAN
-  -- Stig Brautaset
