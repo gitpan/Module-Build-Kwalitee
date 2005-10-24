@@ -1,3 +1,7 @@
+0.15
+  o symlink shipped tests to t/ so they are run for us too
+  o use 'traditional' style of generating Makefile.PL
+
 0.14
   o Improve description a bit
 

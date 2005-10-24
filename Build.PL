@@ -17,7 +17,7 @@ Module::Build->new(
   recommends => {
     'Pod::Coverage::CountParents' => 0,
   },
-  create_makefile_pl => 'passthrough',
+  create_makefile_pl => 'traditional',
   recursive_test_files => 1,
   create_readme => 1,
   add_to_cleanup => [qw( 

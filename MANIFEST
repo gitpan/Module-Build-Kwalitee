@@ -14,3 +14,8 @@ Makefile.PL
 Changes
 NINJA
 t/build.t
+t/000compile.t
+t/001strict.t
+t/002warnings.t
+t/003pod.t
+t/004uselib.t
