@@ -14,7 +14,14 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.15';
+our $VERSION = '0.16';
+
+
+# slightly cheeky trick: Module::Build::Kwalitee::Stub is
+# actually a tiny Module::Build::Kwalitee package, overriding the
+# build_requires() method of Module::Build to add our test
+# dependencies. We don't have to duplicate these deps.
+use Module::Build::Kwalitee::Stub;
 
 =head1 SYNOPSIS
 
@@ -100,13 +107,18 @@ sub ACTION_distdir {
   die "No _build dir '$dist_dir'" unless -d $dist_dir;
 
   # create the mbk folder in the dist dir
-  mkpath([catdir($dist_dir, "mbk", "Module", "Build")])
+  mkpath([catdir($dist_dir, qw(mbk Module Build Kwalitee))])
     or die "Cannot create directory";
 
   # copy in the module stub
-  use Module::Build::Kwalitee::Stub;
   my $stub = $INC{"Module/Build/Kwalitee/Stub.pm"};
   my $dest = catfile($dist_dir, qw(mbk Module Build Kwalitee.pm));
+  copy($stub, $dest) or die "Can't copy file ($stub -> $dest) $!";
+
+  # copy in the helper
+  require Module::Build::Kwalitee::Util;
+  $stub = $INC{"Module/Build/Kwalitee/Util.pm"};
+  $dest = catfile($dist_dir, qw(mbk Module Build Kwalitee Util.pm));
   copy($stub, $dest) or die "Can't copy file ($stub -> $dest) $!";
 
   # munge the manifest so it contains an entry for the shipped
@@ -116,17 +128,13 @@ sub ACTION_distdir {
     chmod 0644, $manifest;
     open MANIFEST, ">>$manifest"
       or die "can't open manifest '$manifest' for writing: $!";
-    print MANIFEST catdir("mbk", "Module", "Build", "Kwalitee.pm"), "\n";
+    print MANIFEST catfile(qw(mbk Module Build Kwalitee.pm)), "\n";
+    print MANIFEST catfile(qw(mbk Module Build Kwalitee Util.pm)), "\n";
     chmod 0444, $manifest;
     close MANIFEST;
   }
 }
 
-# slightly cheeky trick: Module::Build::Kwalitee::Stub is
-# actually a tiny Module::Build::Kwalitee package, overriding the
-# build_requires() method of Module::Build to add our test
-# dependencies. We don't have to duplicate these deps.
-use Module::Build::Kwalitee::Stub;
 
 1;
 

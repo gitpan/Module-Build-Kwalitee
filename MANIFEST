@@ -1,8 +1,7 @@
 lib/Module/Build/Kwalitee.pm
 lib/Module/Build/Kwalitee/Stub.pm
 lib/Module/Build/Kwalitee/000compile.pm
-lib/Module/Build/Kwalitee/001strict.pm
-lib/Module/Build/Kwalitee/002warnings.pm
+lib/Module/Build/Kwalitee/001pragmas.pm
 lib/Module/Build/Kwalitee/003pod.pm
 lib/Module/Build/Kwalitee/004uselib.pm
 Build.PL
@@ -15,7 +14,6 @@ Changes
 NINJA
 t/build.t
 t/000compile.t
-t/001strict.t
-t/002warnings.t
+t/001pragmas.t
 t/003pod.t
 t/004uselib.t

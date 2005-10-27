@@ -20,12 +20,5 @@ Module::Build->new(
   create_makefile_pl => 'traditional',
   recursive_test_files => 1,
   create_readme => 1,
-  add_to_cleanup => [qw( 
-    t/000compile.t 
-    t/001strict.t 
-    t/002warnings.t 
-    t/003pod.t 
-    t/004uselib.t 
-  )],
 )->create_build_script;
 
