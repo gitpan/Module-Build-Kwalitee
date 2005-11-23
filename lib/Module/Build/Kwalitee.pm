@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 
 # slightly cheeky trick: Module::Build::Kwalitee::Stub is
@@ -115,12 +115,6 @@ sub ACTION_distdir {
   my $dest = catfile($dist_dir, qw(mbk Module Build Kwalitee.pm));
   copy($stub, $dest) or die "Can't copy file ($stub -> $dest) $!";
 
-  # copy in the helper
-  require Module::Build::Kwalitee::Util;
-  $stub = $INC{"Module/Build/Kwalitee/Util.pm"};
-  $dest = catfile($dist_dir, qw(mbk Module Build Kwalitee Util.pm));
-  copy($stub, $dest) or die "Can't copy file ($stub -> $dest) $!";
-
   # munge the manifest so it contains an entry for the shipped
   # stub if there exists a manifest in the distribution
   my $manifest = catfile($dist_dir, "MANIFEST");
@@ -129,12 +123,10 @@ sub ACTION_distdir {
     open MANIFEST, ">>$manifest"
       or die "can't open manifest '$manifest' for writing: $!";
     print MANIFEST catfile(qw(mbk Module Build Kwalitee.pm)), "\n";
-    print MANIFEST catfile(qw(mbk Module Build Kwalitee Util.pm)), "\n";
     chmod 0444, $manifest;
     close MANIFEST;
   }
 }
-
 
 1;
 

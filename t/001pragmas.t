@@ -4,19 +4,17 @@
 
 use strict;
 use warnings;
-
 use Test::More;
-use Module::Build::Kwalitee::Util;
+use File::Find::Rule;
 
-my @classes = module_files();
+my @files = File::Find::Rule->file()->name('*.pm')->in('lib');
+plan tests => 2 * scalar @files;
 
-plan tests => 2 * scalar @classes;
-
-foreach my $class ( @classes ) {
+foreach my $file ( @files ) {
   my $fh;
-  local $/ = undef;
-  open $fh, $class;
-  my $file = <$fh>;
-  ok($file =~ qr/use\s+strict\b/, "$class using strict");
-  ok($file =~ qr/use\s+warnings\b/, "$class using warnings");
+  local $/;
+  open $fh, $file;
+  my $content = <$fh>;
+  ok($content =~ qr/use\s+strict\b/, "$file using strict");
+  ok($content =~ qr/use\s+warnings\b/, "$file using warnings");
 }
