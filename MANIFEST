@@ -1,9 +1,5 @@
 lib/Module/Build/Kwalitee.pm
 lib/Module/Build/Kwalitee/Stub.pm
-lib/Module/Build/Kwalitee/000compile.pm
-lib/Module/Build/Kwalitee/001pragmas.pm
-lib/Module/Build/Kwalitee/003pod.pm
-lib/Module/Build/Kwalitee/004uselib.pm
 Build.PL
 MANIFEST
 MANIFEST.SKIP

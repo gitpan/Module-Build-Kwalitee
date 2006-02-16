@@ -1,19 +1,12 @@
----
+--- #YAML:1.0
 name: Module-Build-Kwalitee
-version: 0.17
-author: ~
+version: 0.18
+author:
+  - Stig Brautaset <stig@brautaset.org>,
+Mark Fowler <mark@twoshortplanks.com>,
+Norman Nunley <nnunley@fotango.com>,
+Chia-liang Kao <clkao@clkao.org>,
+et al.
 abstract: Module::Build subclass with prepackaged tests
 license: perl
-requires:
-  File::Find::Rule: 0
-  Module::Build: 0.26
-  Test::More: 0
-  Test::Pod: 0
-  YAML: 0
-recommends:
-  Pod::Coverage::CountParents: 0
-provides:
-  Module::Build::Kwalitee:
-    file: lib/Module/Build/Kwalitee/Stub.pm
-    version: 0.17
-generated_by: Module::Build version 0.2609
+generated_by: Module::Build version 0.2611, without YAML.pm

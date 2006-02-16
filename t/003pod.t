@@ -50,7 +50,7 @@ for my $file (@files) {
     if (defined $coverage) {
       ok( $coverage, "$file has POD" );
       ok( $coverage > 0.90, "$file has ".($coverage * 100)."% coverage > 90%" );
-      if ($ENV{SHOW_NAKED}) { diag(map {"Naked sub: $_\n"} $pc->naked) }
+      diag(map {"Naked sub: $_\n"} $pc->naked);
 
       $total_coverage += $coverage;
       $total_files++;
@@ -66,7 +66,10 @@ for my $file (@files) {
 }
 
 #
-my $average_coverage = $total_coverage / $total_files;
-ok( $average_coverage > 0.98,
-  "Average POD coverage ". ( $average_coverage * 100 )."% > 98%" );
+{
+  skip 1, "no files with pod" unless $total_files;
+  my $average_coverage = $total_coverage / $total_files;
+  ok( $average_coverage > 0.98,
+    "Average POD coverage ". ( $average_coverage * 100 )."% > 98%" );
+}
 

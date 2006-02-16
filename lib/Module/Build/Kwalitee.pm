@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.17';
+our $VERSION = '0.18';
 
 
 # slightly cheeky trick: Module::Build::Kwalitee::Stub is
@@ -89,9 +89,8 @@ sub new
 
   map {
     my (undef, undef, $filename) = splitpath( $_ );
-    $filename =~ s/\.pm$/.t/;
     copy($_, catfile('t', $filename)) or die "Can't copy file: $!";
-  } File::Find::Rule->file()->name( '00*.pm' )->in( $path );
+  } File::Find::Rule->file()->name( '*.t' )->in( $path );
 
   return $self;
 }
@@ -146,10 +145,10 @@ L<Module::Build>
 
 =head1 AUTHOR
 
-  Stig Brautaset <stig@brautaset.org>
-  Mark Fowler <mark@twoshortplanks.com>
-  Norman Nunley <nnunley@fotango.com>
-  Chia-liang Kao <clkao@clkao.org>
-  et al.
+Stig Brautaset <stig@brautaset.org>,
+Mark Fowler <mark@twoshortplanks.com>,
+Norman Nunley <nnunley@fotango.com>,
+Chia-liang Kao <clkao@clkao.org>,
+et al.
 
 =cut

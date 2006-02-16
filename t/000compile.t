@@ -15,7 +15,28 @@ my @classes =
   grep { !/00\d[a-z]+.pm/ }
   File::Find::Rule->file()->name('*.pm')->in('lib');
 
-plan tests => scalar @classes;
+my @scripts;
+eval q{
+  use Module::Build;
+  Module::Build->current->script_files;
+  @scripts = keys %{ Module::Build->current->script_files };
+};
+
+push @scripts, grep { !/\.svn\b/ and !/~$/ } File::Find::Rule
+    ->file()					# find all files
+    ->in('bin') if -d 'bin';			# ... but only if there's a bin/ dir
+
+@scripts = keys %{{ map { $_ => 1 } @scripts }};	# only check scripts once.
+
+@scripts = grep { _perl_shebang($_) } @scripts;
+
+sub _perl_shebang {
+  my $file = shift;
+  open FILE, $file or die "Can't read $file: $!";
+  return <FILE> =~ /^#!.*\bperl/;
+}
+
+plan tests => scalar @classes + @scripts;
 
 # We need to tweak the numbers of the tests
 my $test = Test::Builder->new;
@@ -33,6 +54,11 @@ foreach my $class ( @classes ) {
   warn "Child error: $?" if $?;
 
   $test->current_test( $test->current_test + 1 );
+}
+
+use Config;
+foreach my $script (@scripts) {
+  ok( ! system($Config{perlpath}, "-c", "-Mblib", $script), "$script" );
 }
 
 sub path_to_pkg ($) {

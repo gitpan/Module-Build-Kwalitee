@@ -1,3 +1,9 @@
+0.18
+  * make use of Module::Build magic to install .t files
+  * also test-compile perl scripts in bin/
+  * always report 'naked' subroutines
+  * skip 'total_coverage' test if there are no modules with pod
+
 0.17
   * removed traces of utility module that turned out to be 
     the wrong solution

@@ -10,7 +10,7 @@ WriteMakefile
                            'Test::More' => 0,
                            'File::Find::Rule' => 0,
                            'YAML' => 0,
-                           'Module::Build' => '0.26',
+                           'Module::Build' => '0.2609',
                            'Test::Pod' => 0
                          }
         )
