@@ -7,6 +7,8 @@ use warnings;
 use Test::More;
 use File::Find::Rule;
 
+use constant CONCURRENCY => 5;
+
 eval q/use Test::Builder; 1;/
   or plan skip_all => 'Necessary modules not installed';
   
@@ -26,9 +28,9 @@ push @scripts, grep { !/\.svn\b/ and !/~$/ } File::Find::Rule
     ->file()					# find all files
     ->in('bin') if -d 'bin';			# ... but only if there's a bin/ dir
 
-@scripts = keys %{{ map { $_ => 1 } @scripts }};	# only check scripts once.
-
-@scripts = grep { _perl_shebang($_) } @scripts;
+@scripts = 
+  grep { _perl_shebang($_) }            # only check perl scripts.
+  keys %{{ map { $_ => 1 } @scripts }}; # only check scripts once.
 
 sub _perl_shebang {
   my $file = shift;
@@ -39,26 +41,51 @@ sub _perl_shebang {
 plan tests => scalar @classes + @scripts;
 
 # We need to tweak the numbers of the tests
-my $test = Test::Builder->new;
 
-foreach my $class ( @classes ) {
-  unless (fork) {
-    use_ok( $class );
-    
-    # Ok, now exit. Veeery important, unless we want to drive the load on the
-    # machine to, say, 788.55. That would be bad.
-    exit;
+my %waits;
+my $current = 0;
+while (@classes or keys %waits) {
+  while ($current < CONCURRENCY && (my $class = shift @classes)) {
+    my $child = fork;
+    if ($child) {
+      $waits{$child} = $class;
+      ++$current;
+    }
+    else {
+      my $null;
+      open $null, '>', \(my $str);
+      my $test = Test::Builder->new;
+      $test->output($null);
+
+      # Ok, now exit. Veeery important, unless we want to drive the load on the
+      # machine to, say, 788.55. That would be bad.
+
+      exit !use_ok($class);
+    }
   }
-
-  wait;
-  warn "Child error: $?" if $?;
-
-  $test->current_test( $test->current_test + 1 );
+  if ($current) {
+    my $pid = wait;
+    --$current;
+    ok(!$?, "use $waits{$pid}" );
+  }
+  else {
+    last;
+  }
 }
 
 use Config;
+my $open3 = eval "use IPC::Open3; 1";
 foreach my $script (@scripts) {
-  ok( ! system($Config{perlpath}, "-c", "-Mblib", $script), "$script" );
+  my @lib = -d 'blib' ? '-Mblib' : 
+            -d 'lib'  ? '-Mlib'  : ();
+  my @cmd = ($Config{perlpath}, "-c", @lib, $script);
+  if ($open3) {
+    my $pid = open3(my ($wtr, $rdr, $err), "@cmd");
+    last if wait == -1;
+    ok( ! $?, "@cmd" );
+  } else {
+    ok( ! system(@cmd), "@cmd" );
+  }
 }
 
 sub path_to_pkg ($) {

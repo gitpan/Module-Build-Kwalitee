@@ -1,3 +1,15 @@
+0.19
+  * Don't generate a Makefile.PL - we're only useable with 
+    Module::Build
+  * speed up the compile test of modules by forking more 
+    than one process at a time
+  * make compile test of scripts be more quiet
+  * compile testing of scripts now works correctly if there is no
+    'blib' or 'lib' directory
+  * do pod coverage tests in repeatable order
+  * do pod syntax tests even if we can't do pod coverage tests
+    and vice versa
+
 0.18
   * make use of Module::Build magic to install .t files
   * also test-compile perl scripts in bin/

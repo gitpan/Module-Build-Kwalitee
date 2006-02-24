@@ -16,6 +16,7 @@ my $build = Module::Build->new(
   },
   recommends => {
     'Pod::Coverage::CountParents' => 0,
+    'IPC::Open3' => 0,
   },
   t_files => {
     't/000compile.t' => 'lib/Module/Build/Kwalitee/000compile.t',
@@ -23,7 +24,6 @@ my $build = Module::Build->new(
     't/003pod.t' => 'lib/Module/Build/Kwalitee/003pod.t',
     't/004uselib.t' => 'lib/Module/Build/Kwalitee/004uselib.t',
   },
-  create_makefile_pl => 'traditional',
   recursive_test_files => 1,
   create_readme => 1,
 );

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Module-Build-Kwalitee
-version: 0.18
+version: 0.19
 author:
   - Stig Brautaset <stig@brautaset.org>,
 Mark Fowler <mark@twoshortplanks.com>,

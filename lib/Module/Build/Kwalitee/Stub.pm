@@ -28,6 +28,7 @@ sub recommends {
     %{ $self->SUPER::recommends },
     'Test::Pod' => 0,
     'Pod::Coverage::CountParents' => 0,
+    'IPC::Open3' => 0,
   };
 }
 

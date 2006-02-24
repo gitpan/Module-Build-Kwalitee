@@ -33,6 +33,7 @@ my $requires = {
 my $recommends = {
   'Test::Pod' => 0,
   'Pod::Coverage::CountParents' => 0,
+  'IPC::Open3' => 0,
 };
 is_deeply $build->build_requires, $requires, 'expected requires';
 is_deeply $build->recommends, $recommends, 'expected recommends';
