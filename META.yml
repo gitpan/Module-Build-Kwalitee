@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Module-Build-Kwalitee
-version: 0.19
+version: 0.20
 author:
   - Stig Brautaset <stig@brautaset.org>,
 Mark Fowler <mark@twoshortplanks.com>,
@@ -9,4 +9,4 @@ Chia-liang Kao <clkao@clkao.org>,
 et al.
 abstract: Module::Build subclass with prepackaged tests
 license: perl
-generated_by: Module::Build version 0.2611, without YAML.pm
+generated_by: Module::Build version 0.2609, without YAML.pm

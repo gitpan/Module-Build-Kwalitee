@@ -1,3 +1,7 @@
+0.20
+  * Revert change to not generate Makefile.PL - the version
+    of CPAN.pm released with Perl 5.8 fails to install us :(
+
 0.19
   * Don't generate a Makefile.PL - we're only useable with 
     Module::Build
