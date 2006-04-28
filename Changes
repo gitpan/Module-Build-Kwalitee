@@ -1,3 +1,6 @@
+0.21
+  * Actually *ship* the Makefile.PL too. I suck.
+
 0.20
   * Revert change to not generate Makefile.PL - the version
     of CPAN.pm released with Perl 5.8 fails to install us :(

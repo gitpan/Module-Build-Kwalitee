@@ -1,6 +1,7 @@
 lib/Module/Build/Kwalitee.pm
 lib/Module/Build/Kwalitee/Stub.pm
 Build.PL
+Makefile.PL
 MANIFEST
 MANIFEST.SKIP
 README
