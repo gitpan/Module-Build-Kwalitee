@@ -5,6 +5,7 @@ WriteMakefile
           'PL_FILES' => {},
           'INSTALLDIRS' => 'site',
           'NAME' => 'Module::Build::Kwalitee',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Module/Build/Kwalitee.pm',
           'PREREQ_PM' => {
                            'Test::More' => 0,

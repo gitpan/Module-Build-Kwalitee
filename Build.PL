@@ -2,9 +2,13 @@
 use strict;
 use warnings;
 
-use Module::Build;
+# Jump through some hoops to use ourselves to install
+use File::Spec::Functions;
+use FindBin;
+use lib catdir($FindBin::Bin, 'lib');
+use Module::Build::Kwalitee;
 
-my $build = Module::Build->new(
+my $build = Module::Build::Kwalitee->new(
   license => 'perl',
   module_name => 'Module::Build::Kwalitee',
   requires => {
@@ -17,12 +21,6 @@ my $build = Module::Build->new(
   recommends => {
     'Pod::Coverage::CountParents' => 0,
     'IPC::Open3' => 0,
-  },
-  t_files => {
-    't/000compile.t' => 'lib/Module/Build/Kwalitee/000compile.t',
-    't/001pragmas.t' => 'lib/Module/Build/Kwalitee/001pragmas.t',
-    't/003pod.t' => 'lib/Module/Build/Kwalitee/003pod.t',
-    't/004uselib.t' => 'lib/Module/Build/Kwalitee/004uselib.t',
   },
   recursive_test_files => 1,
   create_readme => 1,

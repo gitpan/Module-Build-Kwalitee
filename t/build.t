@@ -17,7 +17,7 @@ ok (my $build = Module::Build::Kwalitee->new(
   dist_name => 'Foo', 
   dist_version => '0.01',
   dist_author => 'Stig',
-  dist_abstract => '',
+  dist_abstract => 'this is a module that...',
 ), 'get a build object');
 
 ok -d "t", "there's a test directory now";

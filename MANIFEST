@@ -9,7 +9,8 @@ META.yml
 Changes
 NINJA
 t/build.t
-t/000compile.t
-t/001pragmas.t
-t/003pod.t
-t/004uselib.t
+lib/Module/Build/Kwalitee/000compile.t
+lib/Module/Build/Kwalitee/001pragmas.t
+lib/Module/Build/Kwalitee/003pod.t
+lib/Module/Build/Kwalitee/004uselib.t
+mbk/Module/Build/Kwalitee.pm

@@ -1,5 +1,10 @@
+0.22
+  * Make ourselves installable.
+    Thanks to Jos Boumans for pointing out the problem.
+  * Use M::B::K to install M::B::K.
+
 0.21
-  * Actually *ship* the Makefile.PL too. I suck.
+  * Actually ship the Makefile.PL. I suck.
 
 0.20
   * Revert change to not generate Makefile.PL - the version
