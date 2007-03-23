@@ -12,17 +12,17 @@ my $build = Module::Build::Kwalitee->new(
   license => 'perl',
   module_name => 'Module::Build::Kwalitee',
   requires => {
+    'perl' => '5.8.1',
     'YAML' => 0,
     'Module::Build' => '0.2609',
     'File::Find::Rule' => 0,
     'Test::More' => 0,
     'Test::Pod' => 0,
-  },
-  recommends => {
     'Pod::Coverage::CountParents' => 0,
+  },
+  build_requires => {
     'IPC::Open3' => 0,
   },
-  recursive_test_files => 1,
   create_readme => 1,
   create_makefile_pl => 'traditional',
 );

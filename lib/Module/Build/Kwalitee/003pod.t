@@ -8,6 +8,7 @@ my $test_pod = eval 'use Test::Pod; 1';
 my $coverage = eval 'use Pod::Coverage::CountParents; 1';
 
 my @files = File::Find::Rule->file()->name('*.pm', '*.pod')->in('lib');
+plan skip_all => "No modules" unless scalar @files;
 plan tests => ( scalar @files * 3 ) + 1;
 
 my $total_coverage;
@@ -73,7 +74,7 @@ for my $file (sort @files) {
 #
 SKIP: {
   skip "Pod::Coverage::CountParents not installed", 1 unless $coverage;
-  skip 1, "no files with pod" unless $total_files;
+  skip "no files with pod", 1 unless $total_files;
   my $average_coverage = $total_coverage / $total_files;
   ok( $average_coverage > 0.98,
     "Average POD coverage ". ( $average_coverage * 100 )."% > 98%" );

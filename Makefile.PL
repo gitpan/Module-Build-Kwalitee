@@ -5,14 +5,15 @@ WriteMakefile
           'PL_FILES' => {},
           'INSTALLDIRS' => 'site',
           'NAME' => 'Module::Build::Kwalitee',
-          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Module/Build/Kwalitee.pm',
           'PREREQ_PM' => {
-                           'Test::More' => 0,
                            'File::Find::Rule' => 0,
                            'YAML' => 0,
-                           'Module::Build' => '0.2609',
-                           'Test::Pod' => 0
+                           'Test::Pod' => 0,
+                           'IPC::Open3' => 0,
+                           'Test::More' => 0,
+                           'Pod::Coverage::CountParents' => 0,
+                           'Module::Build' => '0.2609'
                          }
         )
 ;

@@ -23,7 +23,7 @@ ok (my $build = Module::Build::Kwalitee->new(
 ok -d "t", "there's a test directory now";
 
 my @files = File::Find::Rule->file()->name('00*.t')->in('t');
-is scalar @files, 4, 'five test files present' or diag Dumper \@files;
+is scalar @files, 5, 'five test files present' or diag Dumper \@files;
 
 # check deps
 my $requires = {

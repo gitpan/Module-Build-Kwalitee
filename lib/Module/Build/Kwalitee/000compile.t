@@ -38,6 +38,7 @@ sub _perl_shebang {
   return <FILE> =~ /^#!.*\bperl/;
 }
 
+plan skip_all => "No modules" unless scalar @classes + @scripts;
 plan tests => scalar @classes + @scripts;
 
 # We need to tweak the numbers of the tests
@@ -76,13 +77,16 @@ while (@classes or keys %waits) {
 use Config;
 my $open3 = eval "use IPC::Open3; 1";
 foreach my $script (@scripts) {
-  my @lib = -d 'blib' ? '-Mblib' : 
-            -d 'lib'  ? '-Mlib'  : ();
+  my @lib = -d 'blib' ? '-Iblib/lib' : 
+            -d 'lib'  ? '-Ilib'  : ();
   my @cmd = ($Config{perlpath}, "-c", @lib, $script);
   if ($open3) {
-    my $pid = open3(my ($wtr, $rdr, $err), "@cmd");
+    my $pid = open3(my ($in, $out, undef), "@cmd");
     last if wait == -1;
-    ok( ! $?, "@cmd" );
+    ok( ! $?, "@cmd" ) or do {
+      read($out, my $error, 9999) or die "could not read from file: $!";
+      diag $error;
+    };
   } else {
     ok( ! system(@cmd), "@cmd" );
   }

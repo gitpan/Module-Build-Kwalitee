@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 
 # slightly cheeky trick: Module::Build::Kwalitee::Stub is
@@ -128,6 +128,13 @@ sub ACTION_distdir {
 }
 
 1;
+
+# these are mixed in from ./Stub.pm, and confuse the pod parser for
+# some versions of the pod parser.
+# new is documented
+# build_requires is documented
+# recommends is documented
+
 
 __END__
 
