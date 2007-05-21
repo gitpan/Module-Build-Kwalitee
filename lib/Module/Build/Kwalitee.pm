@@ -14,7 +14,7 @@ use File::Find::Rule;
 use File::Copy;
 use File::Path;
 
-our $VERSION = '0.23';
+our $VERSION = '0.24';
 
 
 # slightly cheeky trick: Module::Build::Kwalitee::Stub is

@@ -3,7 +3,6 @@ Changes
 lib/Module/Build/Kwalitee.pm
 lib/Module/Build/Kwalitee/000compile.t
 lib/Module/Build/Kwalitee/001pragmas.t
-lib/Module/Build/Kwalitee/002deps.t
 lib/Module/Build/Kwalitee/003pod.t
 lib/Module/Build/Kwalitee/004uselib.t
 lib/Module/Build/Kwalitee/Stub.pm

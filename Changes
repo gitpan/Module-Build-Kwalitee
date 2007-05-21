@@ -1,3 +1,6 @@
+0.24
+  * fix M::B::K::Stub to hide the stubbed version from CPAN indexer
+
 0.22
   * Make ourselves installable.
     Thanks to Jos Boumans for pointing out the problem.
